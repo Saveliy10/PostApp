@@ -3,7 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import MyButton from "../button/MyButton";
 import { AuthContext } from "../../../context";
 import { navLinks } from "../../../constants/navbar";
-import './Navbar.module.css';
+import styles from './Navbar.module.css';
 
 const Navbar = () => {
     //вынести логику
@@ -16,23 +16,23 @@ const Navbar = () => {
     }
 
     return (
-        <div className="navbar">
-            {isAuth &&
-                <MyButton onClick={logout}>
-                    Выйти
-                </MyButton>
-            }
-            <div className="navbar__links">
+        <div className={styles.navbar}>
+            <div className={styles.navbar__links}>
                 {navLinks.map(link => (
                     <Link
                         key={link.to}
                         to={link.to}
-                        className={`navbar__link ${location.pathname === link.to ? 'navbar__link--active' : ''}`}
+                        className={`${styles.navbar__link} ${location.pathname === link.to ? styles['navbar__link--active'] : ''}`}
                     >
                         {link.label}
                     </Link>
                 ))}
             </div>
+            {isAuth &&
+                <MyButton className="navbarBtn" onClick={logout}>
+                    Выйти
+                </MyButton>
+            }
         </div>
     );
 };
