@@ -80,10 +80,9 @@ function Posts() {
             {postError &&
                 <h1>Произошла ошибка ${postError}</h1>
             }
-            {/* <PostList remove={removePost} posts={sortedAndSearchedPosts} title="Посты про JS" /> */}
+            <PostList remove={removePost} posts={sortedAndSearchedPosts} title="Посты про JS" />
             {isPostsLoading
-                ? <div style={{ display: 'flex', justifyContent: 'center', marginTop: 50 }}><Loader /></div>
-                : <PostList remove={removePost} posts={sortedAndSearchedPosts} title="Посты про JS" />
+                && <div style={{ display: 'flex', justifyContent: 'center', marginTop: 50 }}><Loader /></div>
             }
             <div ref={lastElement} style={{ height: 20, background: 'red' }} />
             <Pagination

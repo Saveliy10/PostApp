@@ -7,12 +7,12 @@ const Login = () => {
     const {isAuth, setIsAuth} = useContext(AuthContext);
 
     const login = event => {
-        event.preventDefault();
+        event.preventDefault(); //отменяем перезагрузку страницы при отправке формы
         setIsAuth(true);
         localStorage.setItem('auth', 'true')
     }
 
-    return (
+    return (     
         <div>
             <h1>Страница для логина</h1>
             <form onSubmit={login}>
