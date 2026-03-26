@@ -6,14 +6,8 @@ import { navLinks } from "../../../constants/navbar";
 import styles from './Navbar.module.css';
 
 const Navbar = () => {
-    //вынести логику
-    const { isAuth, setIsAuth } = useContext(AuthContext);
+    const { isAuth, logout } = useContext(AuthContext);
     const location = useLocation();
-
-    const logout = () => {
-        setIsAuth(false);
-        localStorage.removeItem('auth')
-    }
 
     return (
         <div className={styles.navbar}>

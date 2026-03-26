@@ -1,6 +1,6 @@
 import React, {useContext} from 'react';
 import { Navigate, Route, Routes } from "react-router-dom";
-import {privateRoutes, publicRoutes} from "../router";
+import {privateRoutes, publicRoutes} from "../constants/appRouter";
 import {AuthContext} from "../context";
 import Loader from "./UI/Loader/Loader";
 
