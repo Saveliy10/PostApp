@@ -1,18 +1,12 @@
 import React from 'react';
-import cl from './MyModal.module.css'; 
+import { useModalClasses } from '../../../hooks/useModalClasses';
 
-const Mymodal = ({children, visible, setVisible}) => {
-
-    //useMemo
-    const rootClasses = [cl.myModal];
-
-    if(visible) {
-        rootClasses.push(cl.active);
-    }
+const Mymodal = ({ children, visible, setVisible }) => {
+    const classes = useModalClasses(visible);
 
     return (
-        <div className={rootClasses.join(' ')} onClick={() => setVisible(false)}>
-            <div className={cl.myModalContent} onClick={(e) => e.stopPropagation()}>
+        <div className={classes.rootClasses} onClick={() => setVisible(false)}>
+            <div className={classes.contentClasses} onClick={(e) => e.stopPropagation()}>
                 {children}
             </div>
         </div>

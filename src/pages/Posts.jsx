@@ -4,10 +4,10 @@ import { usePosts } from "../hooks/usePosts";
 import { useFetching } from "../hooks/useFetching";
 import { getPageCount } from "../utils/pages";
 import MyButton from "../components/UI/button/MyButton";
-import PostForm from "../components/PostForm";
+import PostForm from "../components/postForm/PostForm.jsx"
 import Mymodal from "../components/UI/MyModal/Mymodal.jsx";
-import PostFilter from "../components/PostFilter";
-import PostList from "../components/PostList";
+import PostFilter from "../components/postFilter/PostFilter.jsx";
+import PostList from "../components/postList/PostList.jsx";
 import Loader from "../components/UI/Loader/Loader";
 import Pagination from "../components/UI/pagination/Pagination";
 import { useObserver } from "../hooks/useObserver";
