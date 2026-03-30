@@ -2,14 +2,18 @@ import React, { useRef } from 'react';
 import PostItem from "../postItem/PostItem";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 
-const PostList = ({ posts, title, remove }) => {
+const PostList = ({ isPostsLoading, posts, title, remove }) => {
 
-    if (!posts.length) {
+    if (!posts.length && !isPostsLoading) {
         return (
             <h1 style={{ textAlign: 'center' }}>
                 Посты не найдены!
             </h1>
         )
+    }
+
+    if (isPostsLoading) {
+        return;
     }
 
     const nodeRefs = useRef(new Map());
@@ -32,10 +36,10 @@ const PostList = ({ posts, title, remove }) => {
                             classNames="post"
                             nodeRef={nodeRef}
                         >
-                            <PostItem 
+                            <PostItem
                                 ref={nodeRef}
-                                remove={remove} 
-                                number={index + 1} 
+                                remove={remove}
+                                number={index + 1}
                                 post={post}
                             />
                         </CSSTransition>

@@ -3,7 +3,7 @@ import './Loader.module.css';
 
 const Loader = () => {
   return (
-    <div className="spinner"></div>
+    <div className="w-10 h-10 border-4 border-[#f3f3f3] border-t-[#3498db] rounded-full animate-spin"></div>
   );
 };
 

@@ -22,7 +22,7 @@ function Posts() {
     const [limit, setLimit] = useState(10);
     const [page, setPage] = useState(1);
     const sortedAndSearchedPosts = usePosts(posts, filter.sort, filter.query);
-    const lastElement = useRef()
+    const lastElement = useRef();
 
     const [fetchPosts, isPostsLoading, postError] = useFetching(async (limit, page) => {
         const response = await PostService.getAll(limit, page);
@@ -80,16 +80,30 @@ function Posts() {
             {postError &&
                 <h1>Произошла ошибка ${postError}</h1>
             }
-            <PostList remove={removePost} posts={sortedAndSearchedPosts} title="Посты про JS" />
-            {isPostsLoading
-                && <div style={{ display: 'flex', justifyContent: 'center', marginTop: 50 }}><Loader /></div>
-            }
+
+            {sortedAndSearchedPosts.length === 0 && isPostsLoading && (
+                <div style={{ display: 'flex', justifyContent: 'center', marginTop: 50 }}>
+                    <Loader />
+                </div>
+            )}
+
+
+            <PostList
+                isPostsLoading={isPostsLoading}
+                remove={removePost}
+                posts={sortedAndSearchedPosts}
+                title="Посты про JS"
+            />
+
+
             <div ref={lastElement} style={{ height: 20, background: 'red' }} />
+
             <Pagination
                 page={page}
                 changePage={changePage}
                 totalPages={totalPages}
             />
+
         </div>
     );
 }
