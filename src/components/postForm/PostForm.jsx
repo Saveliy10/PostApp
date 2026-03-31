@@ -1,37 +1,48 @@
-import React, {useState} from 'react';
+import React, { useRef } from 'react';
 import MyInput from '../UI/input/MyInput';
 import MyButton from '../UI/button/MyButton';
 
-const PostForm = ({create}) => {
+const PostForm = ({ create }) => {
+    const titleInputRef = useRef(null);
+    const bodyInputRef = useRef(null);
 
-    const [post, setPost] = useState({title: '', body: ''});
-    
     const addNewPost = (event) => {
         event.preventDefault();
+
         const newPost = {
-            ...post, id: Date.now()
+            title: titleInputRef.current.value,
+            body: bodyInputRef.current.value,
+            id: Date.now()
         }
 
         create(newPost);
-        setPost({title: '', body: ''});
 
+        titleInputRef.current.value = '';
+        bodyInputRef.current.value = '';
+    }
+
+    const handleTitleChange = (event) => {
+        titleInputRef.current.value = event.target.value;
+    }
+
+    const handleBodyChange = (event) => {
+        bodyInputRef.current.value = event.target.value;
     }
 
     return (
         <form>
             <MyInput
+                ref={titleInputRef}
                 type="text"
                 placeholder="Name of Post"
-                value={post.title}
-                onChange={e => setPost({ ...post, title: e.target.value })}
+                onChange={handleTitleChange}
             />
 
             <MyInput
+                ref={bodyInputRef}
                 type="text"
                 placeholder="Description of Post"
-                value={post.body}
-                onChange={e => setPost({ ...post, body: e.target.value })}
-
+                onChange={handleBodyChange}
             />
 
             <MyButton onClick={addNewPost}>Create Post</MyButton>

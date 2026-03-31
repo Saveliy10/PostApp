@@ -12,10 +12,6 @@ const PostList = ({ isPostsLoading, posts, title, remove }) => {
         )
     }
 
-    if (isPostsLoading) {
-        return;
-    }
-
     const nodeRefs = useRef(new Map());
 
     return (
@@ -24,7 +20,7 @@ const PostList = ({ isPostsLoading, posts, title, remove }) => {
                 {title}
             </h1>
             <TransitionGroup>
-                {posts.map((post, index) => {
+                {posts.map((post) => {
                     if (!nodeRefs.current.has(post.id)) {
                         nodeRefs.current.set(post.id, React.createRef());
                     }
@@ -39,7 +35,7 @@ const PostList = ({ isPostsLoading, posts, title, remove }) => {
                             <PostItem
                                 ref={nodeRef}
                                 remove={remove}
-                                number={index + 1}
+                                // number={index + 1}
                                 post={post}
                             />
                         </CSSTransition>

@@ -1,25 +1,33 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import MyButton from "../UI/button/MyButton";
-import {useNavigate} from 'react-router-dom';
-
-//обернуть в memo
+import { useNavigate } from 'react-router-dom';
 
 const PostItem = React.forwardRef((props, ref) => {
     const navigate = useNavigate()
+    const {remove, post} = props;
+
+    const handleOpen = useCallback(() => {
+        navigate(`/posts/${post.id}`);
+    }, [navigate, post.id]);
+
+    const handleRemove = useCallback(() => {
+        remove(post);
+    }, [remove, post]);
+
 
     return (
         <div ref={ref} className="post">
             <div className="post__content">
-                <strong>{props.post.id}. {props.post.title}</strong>
+                <strong>{post.id}. {post.title}</strong>
                 <div>
-                    {props.post.body}
+                    {post.body}
                 </div>
             </div>
             <div className="post__btns">
-                <MyButton onClick={() => navigate(`/posts/${props.post.id}`)}>
+                <MyButton onClick={handleOpen}>
                     Открыть
                 </MyButton>
-                <MyButton onClick={() => props.remove(props.post)}>
+                <MyButton onClick={handleRemove}>
                     Удалить
                 </MyButton>
             </div>
