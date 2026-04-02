@@ -1,33 +1,27 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import MyInput from '../UI/input/MyInput';
 import MySelect from '../UI/select/MySelect';
 import { options } from '../../constants/postFilter';
+import { usePostFilter } from '../../hooks/usePostFilter';
 
 const PostFilter = ({ filter, setFilter }) => {
 
-    const handleQueryChange = useCallback((e) => {
-        setFilter(prevFilter => ({ ...prevFilter, query: e.target.value }));
-    }, [setFilter]);
-
-    const handleSortChange = useCallback((selectedSort) => {
-        setFilter(prevFilter => ({ ...prevFilter, sort: selectedSort }));
-    }, [setFilter]); 
+    const { handleQueryChange, handleSortChange } = usePostFilter(setFilter);
 
     return (
         <div>
             <MyInput
-                placeholder='Search...'
-                onChange = { handleQueryChange }
-                value={filter.query}
+                placeholder="Search..."
+                defaultValue={filter.query}
+                onChange={(e) => handleQueryChange(e.target.value)}
             />
+
             <MySelect
                 value={filter.sort}
                 onChange={handleSortChange}
                 defaultValue="Sort by"
                 options={options}
-            >
-            </MySelect>
-
+            />
         </div>
     );
 };

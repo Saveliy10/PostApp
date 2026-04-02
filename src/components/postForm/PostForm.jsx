@@ -1,51 +1,45 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import MyInput from '../UI/input/MyInput';
 import MyButton from '../UI/button/MyButton';
+import { useForm } from 'react-hook-form';
+import { postForm } from '../../constants/postForm.js';
 
 const PostForm = ({ create }) => {
-    const titleInputRef = useRef(null);
-    const bodyInputRef = useRef(null);
 
-    const addNewPost = (event) => {
-        event.preventDefault();
+    const {
+        register,
+        handleSubmit,
+        reset,
+        formState: { errors }
+    } = useForm();
 
-        const newPost = {
-            title: titleInputRef.current.value,
-            body: bodyInputRef.current.value,
-            id: Date.now()
-        }
-
-        create(newPost);
-
-        titleInputRef.current.value = '';
-        bodyInputRef.current.value = '';
-    }
-
-    const handleTitleChange = (event) => {
-        titleInputRef.current.value = event.target.value;
-    }
-
-    const handleBodyChange = (event) => {
-        bodyInputRef.current.value = event.target.value;
-    }
+    const addNewPost = (data) => {
+        create({ ...data, id: Date.now() });
+        reset();
+    };
 
     return (
-        <form>
-            <MyInput
-                ref={titleInputRef}
-                type="text"
-                placeholder="Name of Post"
-                onChange={handleTitleChange}
-            />
+        <form onSubmit={handleSubmit(addNewPost)} className="flex flex-col gap-3">
+            {postForm.map((field) => (
+                <div key={field.name}>
+                    <MyInput
+                        {...register(field.name, field.validation)}
+                        type={field.type}
+                        placeholder={field.placeholder}
+                        className="border p-2 w-full"
+                    />
 
-            <MyInput
-                ref={bodyInputRef}
-                type="text"
-                placeholder="Description of Post"
-                onChange={handleBodyChange}
-            />
+                    {errors[field.name] && (
+                        <p className="text-red-500 text-sm">
+                            {errors[field.name].message}
+                        </p>
+                    )}
+                </div>
+            ))}
 
-            <MyButton onClick={addNewPost}>Create Post</MyButton>
+            <MyButton type="submit">
+                Create Post
+            </MyButton>
         </form>
     );
 };

@@ -1,30 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { AuthContext } from "../../context";
+import { useAuth } from '../../hooks/useAuth';
 
 const AuthContextProvider = ({ children }) => {
-
-    const [isAuth, setIsAuth] = useState(() => !!localStorage.getItem('auth'));
-    const [isLoading, setLoading] = useState(true);
-
-    useEffect(() => {
-        if (localStorage.getItem('auth')) {
-            setIsAuth(true);
-        }
-        setLoading(false);
-    }, []);
-
-    const logout = () => {
-        setIsAuth(false);
-        localStorage.removeItem('auth');
-    };
+    const auth = useAuth();
 
     return (
-        <AuthContext.Provider value={{
-            isAuth,
-            setIsAuth,
-            isLoading,
-            logout
-        }}>
+        <AuthContext.Provider value={auth}>
             {children}
         </AuthContext.Provider>
     );

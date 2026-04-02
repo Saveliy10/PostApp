@@ -1,19 +1,9 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import MyButton from "../UI/button/MyButton";
-import { useNavigate } from 'react-router-dom';
+import { usePostItem } from '../../hooks/usePostItem';
 
-const PostItem = React.forwardRef((props, ref) => {
-    const navigate = useNavigate()
-    const {remove, post} = props;
-
-    const handleOpen = useCallback(() => {
-        navigate(`/posts/${post.id}`);
-    }, [navigate, post.id]);
-
-    const handleRemove = useCallback(() => {
-        remove(post);
-    }, [remove, post]);
-
+const PostItem = React.forwardRef(({ post, remove }, ref) => {
+    const { handleOpen, handleRemove } = usePostItem(post, remove);
 
     return (
         <div ref={ref} className="post">

@@ -1,5 +1,6 @@
 export const options = [
-    { value: 'title', name: 'By Name' },
-    { value: 'body', name: 'By Description' }
+    { value: 'title_asc', name: 'По названию (A-Z)' },
+    { value: 'title_desc', name: 'По названию (Z-A)' },
+    { value: 'body_asc', name: 'По описанию (A-Z)' },
+    { value: 'body_desc', name: 'По описанию (Z-A)' },
 ];
-
