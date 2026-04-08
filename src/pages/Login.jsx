@@ -1,5 +1,5 @@
 import React, {useContext} from 'react';
-import MyInput from "../components/UI/input/MyInput";
+import MyInput from "../components/UI/input/MyInput.tsx";
 import MyButton from "../components/UI/button/MyButton";
 import {AuthContext} from "../context";
 

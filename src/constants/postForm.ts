@@ -1,4 +1,17 @@
-export const postForm = [
+type FormField = {
+    name: string;
+    type: string;
+    placeholder: string;
+    validation: {
+        required: string;
+        minLength?: {
+            value: number;
+            message: string;
+        };
+    };
+};
+
+export const postForm: FormField[] = [
     {
         name: 'title',
         type: 'text',
