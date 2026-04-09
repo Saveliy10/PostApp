@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 
-type ModalClasses = {
+interface ModalClasses {
     rootClasses: string;
     contentClasses: string;
 }

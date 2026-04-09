@@ -3,12 +3,11 @@ import Posts from "../pages/Posts.jsx";
 import PostIdPage from "../pages/PostIdPage.jsx";
 import Login from "../pages/Login.jsx";
 
-type Route = {
+interface Route {
     path: string;
     component: React.ComponentType;
     exact: boolean;
 };
-
 
 
 export const privateRoutes: Route[] = [

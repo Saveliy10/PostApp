@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-type AuthContextType = {
+interface AuthContextType {
     isAuth: boolean;
     setIsAuth: React.Dispatch<React.SetStateAction<boolean>>;
     isLoading: boolean;

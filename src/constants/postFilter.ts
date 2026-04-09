@@ -1,4 +1,4 @@
-type PostSortOption = {
+interface PostSortOption {
     value: string;
     name: string;
 };

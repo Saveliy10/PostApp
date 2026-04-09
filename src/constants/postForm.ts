@@ -1,4 +1,4 @@
-type FormField = {
+interface FormFieldType {
     name: string;
     type: string;
     placeholder: string;
@@ -11,7 +11,7 @@ type FormField = {
     };
 };
 
-export const postForm: FormField[] = [
+export const postForm: FormFieldType[] = [
     {
         name: 'title',
         type: 'text',

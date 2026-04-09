@@ -1,10 +1,10 @@
 import { useState } from "react";
 
-type UseFetchingReturn<T extends any[]> = [
-    (...args: T) => Promise<void>,
-    boolean,
-    string
-];
+interface UseFetchingReturn<T extends any[]> {
+    fetching: (...args: T) => Promise<void>;
+    isLoading: boolean;
+    error: string;
+}
 
 export const useFetching = <T extends any[]>(
     callback: (...args: T) => Promise<void>
@@ -23,5 +23,5 @@ export const useFetching = <T extends any[]>(
         }
     };
 
-    return [fetching, isLoading, error]
-}
+    return { fetching, isLoading, error };
+};

@@ -1,4 +1,4 @@
-type Option = {
+interface Option {
   value: number;
   name: string;
 };
