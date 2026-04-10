@@ -1,13 +1,20 @@
 import React from 'react';
-import { getPagesArray } from "../../../utils/pages";
-import { cn } from '../../../utils/cn';
+import { getPagesArray } from "../../../utils/pages.ts";
+import { cn } from '../../../utils/cn.ts';
 
-const Pagination = ({ totalPages, page, changePage }) => {
+interface PaginationProps {
+    totalPages: number;
+    page: number;
+    changePage: (page: number) => void;
+}
+
+const Pagination: React.FC<PaginationProps> = ({ totalPages, page, changePage }) => {
+
     const pagesArray = getPagesArray(totalPages);
     return (
         <div className="mt-7 flex justify-center">
             {pagesArray.map(p =>
-                <span
+                <button
                     onClick={() => changePage(p)}
                     key={p}
                     className={
@@ -16,7 +23,7 @@ const Pagination = ({ totalPages, page, changePage }) => {
                         )}
                 >
                     {p}
-                </span>
+                </button>
             )}
         </div>
     );

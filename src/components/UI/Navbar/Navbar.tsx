@@ -1,12 +1,12 @@
 import React, { useContext } from 'react';
 import { Link, useLocation } from "react-router-dom";
-import MyButton from "../button/MyButton";
-import { AuthContext } from "../../../context";
-import { navLinks } from "../../../constants/navbar";
-import { cn } from '../../../utils/cn';
+import MyButton from "../button/MyButton.tsx";
+import { AuthContext } from "../../../context/index.ts";
+import { navLinks } from "../../../constants/navbar.ts";
+import { cn } from '../../../utils/cn.ts';
 
 
-const Navbar = () => {
+const Navbar: React.FC = () => {
     const { isAuth, logout } = useContext(AuthContext);
     const location = useLocation();
 

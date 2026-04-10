@@ -1,4 +1,4 @@
-import About from "../pages/About.jsx";
+import About from "../pages/About.tsx";
 import Posts from "../pages/Posts.jsx";
 import PostIdPage from "../pages/PostIdPage.jsx";
 import Login from "../pages/Login.jsx";

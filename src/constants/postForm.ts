@@ -1,17 +1,21 @@
-interface FormFieldType {
-    name: string;
-    type: string;
-    placeholder: string;
-    validation: {
-        required: string;
-        minLength?: {
-            value: number;
-            message: string;
-        };
-    };
-};
+import type { PostFormOptions } from "../types/postFormOptions.ts";
+import type { FormFieldType } from "../types/formFieldType.ts";
 
-export const postForm: FormFieldType[] = [
+
+// interface FormFieldType {
+//     name: string;
+//     type: string;
+//     placeholder: string;
+//     validation: {
+//         required: string;
+//         minLength?: {
+//             value: number;
+//             message: string;
+//         };
+//     };
+// };
+
+export const postForm: FormFieldType<PostFormOptions>[] = [
     {
         name: 'title',
         type: 'text',

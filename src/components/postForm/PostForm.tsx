@@ -1,19 +1,25 @@
 import React from 'react';
-import MyInput from '../UI/input/MyInput';
-import MyButton from '../UI/button/MyButton';
+import MyInput from '../UI/input/MyInput.tsx';
+import MyButton from '../UI/button/MyButton.tsx';
 import { useForm } from 'react-hook-form';
-import { postForm } from '../../constants/postForm.js';
+import { postForm } from '../../constants/postForm.ts';
+import type { SubmitHandler } from 'react-hook-form';
+import type { PostFormOptions } from '../../types/postFormOptions.ts';
 
-const PostForm = ({ create }) => {
+interface PostFormProps {
+    create: (data: PostFormOptions & { id: number }) => void;
+}
+
+const PostForm: React.FC<PostFormProps> = ({ create }) => {
 
     const {
         register,
         handleSubmit,
         reset,
         formState: { errors }
-    } = useForm();
+    } = useForm<PostFormOptions>();
 
-    const addNewPost = (data) => {
+    const addNewPost: SubmitHandler<PostFormOptions> = (data) => {
         create({ ...data, id: Date.now() });
         reset();
     };
@@ -29,9 +35,9 @@ const PostForm = ({ create }) => {
                         className="border p-2 w-full"
                     />
 
-                    {errors[field.name] && (
+                    {errors[field.name]?.message && (
                         <p className="text-red-500 text-sm">
-                            {errors[field.name].message}
+                            {errors[field.name]?.message as string}
                         </p>
                     )}
                 </div>

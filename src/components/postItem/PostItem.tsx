@@ -1,8 +1,14 @@
 import React from 'react';
-import MyButton from "../UI/button/MyButton";
-import { usePostItem } from '../../hooks/usePostItem';
+import MyButton from "../UI/button/MyButton.tsx";
+import { usePostItem } from '../../hooks/usePostItem.ts';
+import type { Post } from '../../types/posts.ts';
 
-const PostItem = React.forwardRef(({ post, remove }, ref) => {
+interface PostItemProps {
+    post: Post;
+    remove: (post: Post) => void;
+}
+
+const PostItem = React.forwardRef<HTMLDivElement, PostItemProps>(({ post, remove }, ref) => {
     const { handleOpen, handleRemove } = usePostItem(post, remove);
 
     return (

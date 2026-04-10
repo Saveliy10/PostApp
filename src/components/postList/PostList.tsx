@@ -1,8 +1,18 @@
 import React, { useRef } from 'react';
-import PostItem from "../postItem/PostItem";
+import PostItem from "../postItem/PostItem.tsx";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
+import type { Post } from "../../types/posts.ts";
 
-const PostList = ({ isPostsLoading, posts, title, remove }) => {
+interface PostListProps {
+    isPostsLoading: boolean;
+    posts: Post[];
+    title: string;
+    remove: (post: Post) => void;
+}
+
+const PostList: React.FC<PostListProps> = ({ isPostsLoading, posts, title, remove }) => {
+
+    const nodeRefs = useRef<Map<number, React.RefObject<HTMLDivElement>>>(new Map());
 
     if (!posts.length && !isPostsLoading) {
         return (
@@ -12,8 +22,6 @@ const PostList = ({ isPostsLoading, posts, title, remove }) => {
         )
     }
 
-    const nodeRefs = useRef(new Map());
-
     return (
         <div>
             <h1 style={{ textAlign: 'center' }}>
@@ -22,7 +30,7 @@ const PostList = ({ isPostsLoading, posts, title, remove }) => {
             <TransitionGroup>
                 {posts.map((post) => {
                     if (!nodeRefs.current.has(post.id)) {
-                        nodeRefs.current.set(post.id, React.createRef());
+                        nodeRefs.current.set(post.id, React.createRef<HTMLDivElement>());
                     }
                     const nodeRef = nodeRefs.current.get(post.id);
                     return (

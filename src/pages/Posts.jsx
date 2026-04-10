@@ -33,13 +33,13 @@ function Posts() {
 
     return (
         <div className="App">
-            <MyButton style={{ marginTop: 30 }} onClick={() => setModal(true)}>
+            <MyButton className="mt-7" onClick={() => setModal(true)}>
                 Create Post
             </MyButton>
             <Mymodal visible={modal} setVisible={setModal}>
                 <PostForm create={createPost} />
             </Mymodal>
-            <hr style={{ margin: '15px 0' }} />
+            <hr className="my-4" />
             <PostFilter
                 filter={filter}
                 setFilter={setFilter}
@@ -56,7 +56,7 @@ function Posts() {
             }
 
             {isPostsLoading && (
-                <div style={{ display: 'flex', justifyContent: 'center', marginTop: 50 }}>
+                <div className='flex justify-center mt-13'>
                     <Loader />
                 </div>
             )}
@@ -70,7 +70,7 @@ function Posts() {
             />
 
 
-            <div ref={lastElement} style={{ height: 20, background: 'red' }} />
+            <div ref={lastElement} className="h-5 bg-red-500" />
 
             <Pagination
                 page={page}

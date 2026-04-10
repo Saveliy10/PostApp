@@ -1,18 +1,10 @@
 import { useEffect, useState } from 'react';
-
-interface AuthContextType {
-    isAuth: boolean;
-    setIsAuth: React.Dispatch<React.SetStateAction<boolean>>;
-    isLoading: boolean;
-    login: () => void;
-    logout: () => void;
-};
+import type { AuthContextType } from "../context/index.ts";
 
 const AUTH_KEY = 'auth' as const;
 
-
 export const useAuth = (): AuthContextType => {
-    const [isAuth, setIsAuth] = useState<boolean>(() => !!localStorage.getItem(AUTH_KEY));
+    const [isAuth, setIsAuth] = useState<boolean>(() => {return !!localStorage.getItem(AUTH_KEY)});
     const [isLoading, setLoading] = useState<boolean>(true);
 
     useEffect(() => {

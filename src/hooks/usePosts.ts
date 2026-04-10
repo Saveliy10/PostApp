@@ -1,14 +1,18 @@
 import { useMemo } from "react";
+import type { Post } from "../types/posts.ts";
 
-export const usePosts = (posts, sort, query) => {
+export const usePosts = (posts: Post[], sort: string, query: string): Post[] => {
 
     const sortedAndSearchedPosts = useMemo(() => {
         let result = posts;
         if (sort) {
-            const [field, order] = sort.split('_');
+            const [field, order] = sort.split('_') as [SortField: keyof Post, SortOrder: 'asc' | 'desc'];
 
             result = [...posts].sort((a, b) => {
-                const compare = a[field].localeCompare(b[field]);
+                const aValue = String(a[field]);
+                const bValue = String(b[field]);
+
+                const compare = aValue.localeCompare(bValue);
 
                 return order === 'asc' ? compare : -compare;
             });
