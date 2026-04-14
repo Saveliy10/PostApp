@@ -3,7 +3,7 @@ import Loader from '../components/UI/Loader/Loader.tsx';
 import { usePostDetails } from '../hooks/usePostDetails.ts';
 import type { Comment } from '../types/comments.ts';
 
-const PostIdPage = () => {
+const PostIdPage: React.FC = () => {
     const { id } = useParams<{ id: string }>();
     const {
         post,
@@ -12,19 +12,19 @@ const PostIdPage = () => {
         error,
         isCommentsLoading,
         commentsError,
-    } = usePostDetails(id);
+    } = usePostDetails(id ?? '');
 
-    const renderComments = () => {
+    const renderComments = (): React.ReactNode => {
         if (isCommentsLoading) {
             return <Loader />;
         }
 
         if (commentsError) {
-            return <p className="text-red-500">Ошибка: {commentsError}</p>;
+            return <p className="text-red-500">Error: {commentsError}</p>;
         }
 
         if (!comments.length) {
-            return <p className="text-gray-500">Пока нет комментариев.</p>;
+            return <p className="text-gray-500">No comments yet.</p>;
         }
 
         return (
@@ -51,7 +51,7 @@ const PostIdPage = () => {
                             </h1>
                         </div>
                         <Link to="/posts" className="inline-flex items-center rounded-full border border-slate-300 bg-slate-50 px-4 py-2 text-sm font-medium text-slate-700 transition hover:bg-slate-100">
-                            Назад к списку
+                            Back
                         </Link>
                     </header>
 
@@ -60,7 +60,7 @@ const PostIdPage = () => {
                             <Loader />
                         </div>
                     ) : error ? (
-                        <p className="text-red-500">Ошибка загрузки поста: {error}</p>
+                        <p className="text-red-500">Error loading post: {error}</p>
                     ) : (
                         <div className="rounded-3xl border border-slate-200 bg-slate-50 p-8">
                             <div className="mb-4 text-sm text-slate-500">Post ID: {id}</div>
@@ -69,7 +69,7 @@ const PostIdPage = () => {
                     )}
 
                     <section className="space-y-4">
-                        <h2 className="text-xl font-semibold text-slate-900">Комментарии</h2>
+                        <h2 className="text-xl font-semibold text-slate-900">Comments</h2>
                         {renderComments()}
                     </section>
                 </div>

@@ -3,7 +3,7 @@ import MyInput from '../components/UI/input/MyInput.tsx';
 import MyButton from '../components/UI/button/MyButton.tsx';
 import { useAuthContext } from '../hooks/useAuthContext.ts';
 
-const Login = () => {
+const Login: React.FC = () => {
     const { setIsAuth } = useAuthContext();
 
     const handleLogin = (event: FormEvent<HTMLFormElement>) => {
@@ -15,7 +15,7 @@ const Login = () => {
     return (
         <div>
             <h1>Страница для логина</h1>
-            <form onSubmit={login}>
+            <form onSubmit={handleLogin}>
                 <MyInput type="text" placeholder="Введите логин" />
                 <MyInput type="password" placeholder="Введите пароль" />
                 <MyButton>Войти</MyButton>

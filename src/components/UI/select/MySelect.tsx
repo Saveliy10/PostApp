@@ -1,15 +1,15 @@
 import React from 'react';
 
 interface Option {
-    value: string;
+    value: number;
     name: string;
 }
 
 interface MySelectProps {
     options: Option[];
-    defaultValue: string;
-    value: string;
-    onChange: (value: string) => void;
+    defaultValue: number | string;
+    value: number;
+    onChange: (value: number) => void;
 }
 
 const MySelect: React.FC<MySelectProps> = ({ options, defaultValue, value, onChange }) => {
@@ -17,7 +17,7 @@ const MySelect: React.FC<MySelectProps> = ({ options, defaultValue, value, onCha
         <select
             value={value}
             onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
-                onChange(e.target.value)
+                onChange(Number(e.target.value))
             }
         >
             <option disabled value="">{defaultValue}</option>

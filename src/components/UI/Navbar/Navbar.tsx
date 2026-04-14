@@ -1,15 +1,17 @@
-import { useLocation } from 'react-router-dom';
-import MyButton from '../button/MyButton.tsx';
-import { useAuthContext } from '../../../hooks/useAuthContext.ts';
-import { navLinks } from '../../../constants/navbar.ts';
+import React, { useContext } from 'react';
+import { Link, useLocation } from "react-router-dom";
+import MyButton from "../button/MyButton.tsx";
+import { AuthContext } from "../../../context/index.ts";
+import { navLinks } from "../../../constants/navbar.ts";
 import { cn } from '../../../utils/cn.ts';
 
-const Navbar = () => {
-    const { isAuth, logout } = useAuthContext();
+
+const Navbar: React.FC = () => {
+    const { isAuth, logout } = useContext(AuthContext);
     const location = useLocation();
 
     return (
-        <div className='h-16 w-full flex items-center justify-between px-5 bg-gradient-to-br from-[#667eea] to-[#764ba2] shadow-[0_2px_10px_rgba(0,0,0,0.1)] sticky top-0 z-[100]'>
+        <div className='h-15 w-screen flex items-center justify-between px-5 bg-linear-to-br from-[#667eea] to-[#764ba2] shadow-[0_2px_10px_rgba(0,0,0,0.1)] sticky top-0 z-100'>
             <div className='flex items-center gap-5'>
                 {navLinks.map(link => (
                     <Link

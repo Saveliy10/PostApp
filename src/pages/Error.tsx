@@ -1,10 +1,10 @@
 import React from 'react';
 
-const Error = () => {
+const Error: React.FC = () => {
     return (
         <div>
             <h1 style={{color: 'red'}}>
-                Вы перешли на несуществующую страницу!
+                You have navigated to a non-existent page!
             </h1>
         </div>
     );

@@ -1,4 +1,4 @@
-const About = () => {
+const About: React.FC = () => {
     return (
         <div className="min-h-screen bg-gradient-to-br from-slate-50 via-slate-100 to-slate-200 py-12 px-4 sm:px-6 lg:px-8">
             <div className="mx-auto max-w-5xl space-y-8">
@@ -18,23 +18,23 @@ const About = () => {
                     </div>
 
                     <p className="mt-6 text-slate-600 leading-8">
-                        Это приложение демонстрирует практическую работу с современным фронтендом:
-                        формы, состояние, роутинг, контекст и асинхронные запросы. В проекте
-                        используется TypeScript, Tailwind CSS и архитектура компонентов.
+                        This application demonstrates practical work with modern frontend development:
+                        forms, state management, routing, context, and asynchronous requests. The project
+                        uses TypeScript, Tailwind CSS, and a component-based architecture.
                     </p>
                 </section>
 
                 <div className="grid gap-6 lg:grid-cols-3">
                     <article className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-                        <h2 className="text-xl font-semibold text-slate-900">Что реализовано</h2>
+                        <h2 className="text-xl font-semibold text-slate-900">What is implemented</h2>
                         <ul className="mt-4 space-y-3 text-slate-600">
-                            <li>• Поиск и фильтрация постов</li>
-                            <li>• Страницы с деталями поста</li>
-                            <li>• Контекст авторизации</li>
+                            <li>• Search and filtering of posts</li>
+                            <li>• Pages with post details</li>
+                            <li>• Authorization context</li>
                         </ul>
                     </article>
                     <article className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-                        <h2 className="text-xl font-semibold text-slate-900">Технологии</h2>
+                        <h2 className="text-xl font-semibold text-slate-900">Technologies</h2>
                         <ul className="mt-4 space-y-3 text-slate-600">
                             <li>• React + TypeScript</li>
                             <li>• Vite + Tailwind CSS</li>
@@ -42,9 +42,9 @@ const About = () => {
                         </ul>
                     </article>
                     <article className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-                        <h2 className="text-xl font-semibold text-slate-900">Цель</h2>
+                        <h2 className="text-xl font-semibold text-slate-900">Goal</h2>
                         <p className="mt-4 text-slate-600 leading-7">
-                            Сделать удобный учебный интерфейс с чистой логикой и понятной структурой.
+                            To create a user-friendly interface with clean logic and an understandable structure.
                         </p>
                     </article>
                 </div>
