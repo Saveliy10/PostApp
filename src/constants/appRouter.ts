@@ -1,11 +1,12 @@
-import About from "../pages/About.tsx";
-import Posts from "../pages/Posts.jsx";
-import PostIdPage from "../pages/PostIdPage.jsx";
-import Login from "../pages/Login.jsx";
+import type { ComponentType } from 'react';
+import About from '../pages/About.tsx';
+import Posts from '../pages/Posts.tsx';
+import PostIdPage from '../pages/PostIdPage.tsx';
+import Login from '../pages/Login.tsx';
 
 interface Route {
     path: string;
-    component: React.ComponentType;
+    component: ComponentType;
     exact: boolean;
 };
 

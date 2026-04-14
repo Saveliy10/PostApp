@@ -1,34 +1,34 @@
-import { useEffect, useRef, useState } from 'react';
-import PostService from "../API/PostService.jsx";
-import { useFetching } from "./useFetching.js";
-import { getPageCount } from "../utils/pages.js";
-import { useObserver } from "./useObserver.js";
+import { useCallback, useEffect, useRef, useState, type Dispatch, type RefObject, type SetStateAction } from 'react';
+import PostService from '../API/PostService.ts';
+import { useFetching } from './useFetching.ts';
+import { getPageCount } from '../utils/pages.ts';
+import { useObserver } from './useObserver.ts';
 import type { Post } from '../types/posts.ts';
 
 interface UsePostsDataReturnType {
     posts: Post[];
     isPostsLoading: boolean;
-    postError: any;
+    postError: string;
     totalPages: number;
     page: number;
-    lastElement: React.RefObject<HTMLElement>;
+    lastElement: RefObject<HTMLElement | null>;
     createPost: (newPost: Post) => void;
     removePost: (post: Post) => void;
     changePage: (page: number) => void;
-    setPage: React.Dispatch<React.SetStateAction<number>>;
-    setPosts: React.Dispatch<React.SetStateAction<Post[]>>;
+    setPage: Dispatch<SetStateAction<number>>;
+    setPosts: Dispatch<SetStateAction<Post[]>>;
 };
 
 
 export const usePostsData =
-    (limit: number, setModal: React.Dispatch<React.SetStateAction<boolean>>): UsePostsDataReturnType => {
+    (limit: number, setModal: Dispatch<SetStateAction<boolean>>): UsePostsDataReturnType => {
 
         const [posts, setPosts] = useState<Post[]>([]);
         const [totalPages, setTotalPages] = useState<number>(0);
         const [page, setPage] = useState<number>(1);
         const lastElement = useRef<HTMLElement | null>(null);
 
-        const {fetching: fetchPosts, isLoading: isPostsLoading, error: postError} = useFetching(async (limit: number, page: number  ) => {
+        const fetchPostsCallback = useCallback(async (limit: number, page: number) => {
             const response = await PostService.getAll(limit, page);
 
             if (page === 1) {
@@ -39,7 +39,9 @@ export const usePostsData =
 
             const totalCount = response.headers['x-total-count'];
             setTotalPages(getPageCount(totalCount, limit));
-        });
+        }, []);
+
+        const { fetching: fetchPosts, isLoading: isPostsLoading, error: postError } = useFetching(fetchPostsCallback);
 
         useObserver(lastElement, page < totalPages, isPostsLoading, () => {
             setPage(prev => prev + 1);

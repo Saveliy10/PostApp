@@ -1,19 +1,17 @@
-import React, {useContext} from 'react';
-import { Navigate, Route, Routes } from "react-router-dom";
-import {privateRoutes, publicRoutes} from "../../constants/appRouter";
-import {AuthContext} from "../../context";
-import Loader from "../UI/Loader/Loader";
+import { Navigate, Route, Routes } from 'react-router-dom';
+import { privateRoutes, publicRoutes } from '../../constants/appRouter.ts';
+import { useAuthContext } from '../../hooks/useAuthContext.ts';
+import Loader from '../UI/Loader/Loader.tsx';
 
 const AppRouter = () => {
-    const {isAuth, isLoading} = useContext(AuthContext);
+    const { isAuth, isLoading } = useAuthContext();
 
     if (isLoading) {
-        return <Loader />
+        return <Loader />;
     }
 
     return (
-        isAuth
-            ?
+        isAuth ? (
             <Routes>
                 {privateRoutes.map(route => {
                     const Component = route.component;
@@ -25,9 +23,9 @@ const AppRouter = () => {
                         />
                     );
                 })}
-                <Route path="*" element={<Navigate to='/posts' />} />
+                <Route path="*" element={<Navigate to="/posts" />} />
             </Routes>
-            :
+        ) : (
             <Routes>
                 {publicRoutes.map(route => {
                     const Component = route.component;
@@ -39,8 +37,9 @@ const AppRouter = () => {
                         />
                     );
                 })}
-                <Route path="*" element={<Navigate to='/login' />} />
+                <Route path="*" element={<Navigate to="/login" />} />
             </Routes>
+        )
     );
 };
 

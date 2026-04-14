@@ -1,6 +1,6 @@
-import { BrowserRouter } from "react-router-dom";
-import Navbar from "./components/UI/Navbar/Navbar";
-import AppRouter from "./components/appRouter/AppRouter";
+import { BrowserRouter } from 'react-router-dom';
+import Navbar from './components/UI/Navbar/Navbar.tsx';
+import AppRouter from './components/appRouter/AppRouter.tsx';
 import './styles/App.css';
 import AuthContextProvider from './components/authContextProvider/AuthContextProvider';
 
@@ -12,7 +12,7 @@ function App() {
                 <AppRouter />
             </BrowserRouter>
         </AuthContextProvider>
-    )
+    );
 }
 
 export default App;
