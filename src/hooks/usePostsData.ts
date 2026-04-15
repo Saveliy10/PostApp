@@ -11,7 +11,7 @@ interface UsePostsDataReturnType {
     postError: string;
     totalPages: number;
     page: number;
-    lastElement: RefObject<HTMLElement | null>;
+    lastElement: RefObject<HTMLDivElement | null>;
     createPost: (newPost: Post) => void;
     removePost: (post: Post) => void;
     changePage: (page: number) => void;
@@ -26,7 +26,7 @@ export const usePostsData =
         const [posts, setPosts] = useState<Post[]>([]);
         const [totalPages, setTotalPages] = useState<number>(0);
         const [page, setPage] = useState<number>(1);
-        const lastElement = useRef<HTMLElement | null>(null);
+        const lastElement = useRef<HTMLDivElement | null>(null);
 
         const fetchPostsCallback = useCallback(async (limit: number, page: number) => {
             const response = await PostService.getAll(limit, page);
