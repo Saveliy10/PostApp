@@ -5,7 +5,6 @@ import type { Post } from '../types/posts.ts';
 interface Handlers {
     handleOpen: (event: MouseEvent<HTMLButtonElement>) => void;
     handleRemove: (event: MouseEvent<HTMLButtonElement>) => void;
-    handleShowId: () => void;
 }
 
 export const usePostItem = (post: Post, remove: (post: Post) => void): Handlers => {
@@ -22,13 +21,8 @@ export const usePostItem = (post: Post, remove: (post: Post) => void): Handlers 
         remove(post);
     }, [remove, post]);
 
-    const handleShowId = useCallback(() => {
-        alert(`Post id: ${post.id}`);
-    }, [post.id]);
-
     return {
         handleOpen,
         handleRemove,
-        handleShowId,
     };
 };

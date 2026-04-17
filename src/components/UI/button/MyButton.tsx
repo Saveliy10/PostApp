@@ -7,9 +7,9 @@ interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const MyButton: FC<Props> = ({ children, className, ...props }) => {
-
     const buttonClass = cn(
-        'px-4 py-2 text-teal-600 text-[14px] bg-transparent border border-teal-600 cursor-pointer rounded-[20px] hover:transition-all hover:duration-300 hover:ease-in-out hover:bg-teal-600/10 hover:-translate-y-[1px]',
+        'inline-flex items-center justify-center rounded-2xl px-5 py-3 text-sm font-semibold transition duration-200 ease-out focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2',
+        'border border-transparent bg-gradient-to-r from-cyan-500 to-teal-500 text-white shadow-lg shadow-cyan-500/20 hover:-translate-y-0.5 hover:shadow-cyan-500/30',
         className
     );
 

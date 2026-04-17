@@ -21,7 +21,11 @@ interface UsePostsDataReturnType {
 
 
 export const usePostsData =
-    (limit: number, setModal: Dispatch<SetStateAction<boolean>>): UsePostsDataReturnType => {
+    (
+        limit: number,
+        setModal: Dispatch<SetStateAction<boolean>>,
+        pauseLoading = false
+    ): UsePostsDataReturnType => {
 
         const [posts, setPosts] = useState<Post[]>([]);
         const [totalPages, setTotalPages] = useState<number>(0);
@@ -43,32 +47,33 @@ export const usePostsData =
 
         const { fetching: fetchPosts, isLoading: isPostsLoading, error: postError } = useFetching(fetchPostsCallback);
 
-        useObserver(lastElement, page < totalPages, isPostsLoading, () => {
+        useObserver(lastElement, page < totalPages && !pauseLoading, isPostsLoading, () => {
             setPage(prev => prev + 1);
         });
 
-        // useEffect(() => {
-        //     setPosts([]);
-        //     setPage(1);
-        // }, [limit]);
+        useEffect(() => {
+            setPosts([]);
+            setPage(1);
+        }, [limit]);
 
         useEffect(() => {
-            fetchPosts(limit, page)
-        }, [page, limit]);
+            if (pauseLoading) return;
+            fetchPosts(limit, page);
+        }, [page, limit, pauseLoading, fetchPosts]);
 
-        const createPost = (newPost: Post) => {
+        const createPost = useCallback((newPost: Post) => {
             setPosts(prev => [...prev, newPost]);
             setModal(false);
-        }
+        }, [setModal]);
 
         // Получаем post из дочернего компонента
-        const removePost = (post: Post) => {
-            setPosts(prev => prev.filter(p => p.id !== post.id))
-        }
+        const removePost = useCallback((post: Post) => {
+            setPosts(prev => prev.filter(p => p.id !== post.id));
+        }, []);
 
-        const changePage = (page: number) => {
-            setPage(page)
-        }
+        const changePage = useCallback((page: number) => {
+            setPage(page);
+        }, []);
 
         return {
             posts,
