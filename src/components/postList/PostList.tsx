@@ -1,23 +1,24 @@
 import React, { useRef } from 'react';
+import type { FC, RefObject } from 'react';
 import PostItem from "../postItem/PostItem.tsx";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import type { Post } from "../../types/posts.ts";
 
-interface PostListProps {
+interface Props {
     isPostsLoading: boolean;
     posts: Post[];
     title: string;
     remove: (post: Post) => void;
 }
 
-const PostList: React.FC<PostListProps> = ({ isPostsLoading, posts, title, remove }) => {
+const PostList: FC<Props> = ({ isPostsLoading, posts, title, remove }) => {
 
-    const nodeRefs = useRef<Map<number, React.RefObject<HTMLDivElement>>>(new Map());
+    const nodeRefs = useRef<Map<number, RefObject<HTMLDivElement>>>(new Map());
 
     if (!posts.length && !isPostsLoading) {
         return (
             <h1 style={{ textAlign: 'center' }}>
-                Посты не найдены!
+                Posts not found
             </h1>
         )
     }

@@ -3,11 +3,11 @@ import type { ReactNode } from 'react';
 import { AuthContext } from "../../context/index.ts";
 import { useAuth } from '../../hooks/useAuth.ts';
 
-interface AuthContextProviderProps {
+interface Props {
     children: ReactNode;
 }
 
-const AuthContextProvider: React.FC<AuthContextProviderProps> = ({ children }) => {
+const AuthContextProvider: React.FC<Props> = ({ children }) => {
     const auth = useAuth();
 
     return (

@@ -1,9 +1,9 @@
-import { type FormEvent } from 'react';
+import type { FC, FormEvent } from 'react';
 import MyInput from '../components/UI/input/MyInput.tsx';
 import MyButton from '../components/UI/button/MyButton.tsx';
 import { useAuthContext } from '../hooks/useAuthContext.ts';
 
-const Login: React.FC = () => {
+const Login: FC = () => {
     const { setIsAuth } = useAuthContext();
 
     const handleLogin = (event: FormEvent<HTMLFormElement>) => {
@@ -14,11 +14,11 @@ const Login: React.FC = () => {
 
     return (
         <div>
-            <h1>Страница для логина</h1>
+            <h1>Login Page</h1>
             <form onSubmit={handleLogin}>
-                <MyInput type="text" placeholder="Введите логин" />
-                <MyInput type="password" placeholder="Введите пароль" />
-                <MyButton>Войти</MyButton>
+                <MyInput type="text" placeholder="Enter username" />
+                <MyInput type="password" placeholder="Enter password" />
+                <MyButton>Log In</MyButton>
             </form>
         </div>
     );

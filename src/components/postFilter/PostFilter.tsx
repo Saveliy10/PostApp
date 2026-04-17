@@ -1,4 +1,4 @@
-import type { Dispatch, SetStateAction } from 'react';
+import type { Dispatch, SetStateAction, FC } from 'react';
 import MyInput from '../UI/input/MyInput.tsx';
 import MySelect from '../UI/select/MySelect.tsx';
 import { options } from '../../constants/postFilter.ts';
@@ -9,19 +9,19 @@ interface FilterState {
     query: string;
 }
 
-interface PostFilterProps {
+interface Props {
     filter: FilterState;
     setFilter: Dispatch<SetStateAction<FilterState>>;
 }
 
-const PostFilter = ({ filter, setFilter }: PostFilterProps) => {
+const PostFilter: FC<Props> = ({ filter, setFilter }) => {
     const { handleQueryChange, handleSortChange } = usePostFilter(setFilter);
 
     return (
         <div>
             <MyInput
                 placeholder="Search..."
-                defaultValue={filter.query}
+                value={filter.query}
                 onChange={e => handleQueryChange(e.target.value)}
             />
             <MySelect

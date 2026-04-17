@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { usePosts } from '../hooks/usePosts.ts';
 import MyButton from '../components/UI/button/MyButton.tsx';
 import PostForm from '../components/postForm/PostForm.tsx';
@@ -18,6 +18,7 @@ interface FilterState {
 
 function Posts() {
     const [filter, setFilter] = useState<FilterState>({ sort: '', query: '' });
+    const [debouncedQuery, setDebouncedQuery] = useState<string>('');
     const [modal, setModal] = useState<boolean>(false);
     const [limit, setLimit] = useState<number>(10);
 
@@ -33,14 +34,22 @@ function Posts() {
         changePage,
     } = usePostsData(limit, setModal);
 
-    const sortedAndSearchedPosts = usePosts(posts, filter.sort, filter.query);
+    useEffect(() => {
+        const handler = setTimeout(() => {
+            setDebouncedQuery(filter.query);
+        }, 500);
+
+        return () => clearTimeout(handler);
+    }, [filter.query]);
+
+    const sortedAndSearchedPosts = usePosts(posts, filter.sort, debouncedQuery);
 
     const openModal = useCallback(() => {
         setModal(true);
     }, []);
 
-    const handleLimitChange = useCallback((value: number) => {
-        setLimit(value);
+    const handleLimitChange = useCallback((value: string) => {
+        setLimit(Number(value));
     }, []);
 
     return (
@@ -77,7 +86,7 @@ function Posts() {
 
             <div ref={lastElement} className="h-5 bg-red-500" />
 
-            <Pagination page={page} changePage={changePage} totalPages={totalPages} />
+            {/* <Pagination page={page} changePage={changePage} totalPages={totalPages} /> */}
         </div>
     );
 }

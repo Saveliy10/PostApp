@@ -1,4 +1,4 @@
-import React from 'react';
+import type { FC } from 'react';
 import MyInput from '../UI/input/MyInput.tsx';
 import MyButton from '../UI/button/MyButton.tsx';
 import { useForm } from 'react-hook-form';
@@ -6,11 +6,11 @@ import { postForm } from '../../constants/postForm.ts';
 import type { SubmitHandler } from 'react-hook-form';
 import type { PostFormOptions } from '../../types/postFormOptions.ts';
 
-interface PostFormProps {
+interface Props {
     create: (data: PostFormOptions & { id: number }) => void;
 }
 
-const PostForm: React.FC<PostFormProps> = ({ create }) => {
+const PostForm: FC<Props> = ({ create }) => {
 
     const {
         register,

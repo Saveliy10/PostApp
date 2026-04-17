@@ -31,7 +31,7 @@ const Navbar: React.FC = () => {
             </div>
             {isAuth &&
                 <MyButton className="text-white bg-white/20 border border-white/30 font-medium hover:bg-white/30 hover:-translate-y-0.5 hover:shadow-[0_4px_8px_rgba(0,0,0,0.2)]" onClick={logout}>
-                    Выйти
+                    Log Out
                 </MyButton>
             }
         </div>

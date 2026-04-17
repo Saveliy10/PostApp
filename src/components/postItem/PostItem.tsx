@@ -3,16 +3,16 @@ import MyButton from "../UI/button/MyButton.tsx";
 import { usePostItem } from '../../hooks/usePostItem.ts';
 import type { Post } from '../../types/posts.ts';
 
-interface PostItemProps {
+interface Props {
     post: Post;
     remove: (post: Post) => void;
 }
 
-const PostItem = React.forwardRef<HTMLDivElement, PostItemProps>(({ post, remove }, ref) => {
-    const { handleOpen, handleRemove } = usePostItem(post, remove);
+const PostItem = React.forwardRef<HTMLDivElement, Props>(({ post, remove }, ref) => {
+    const { handleOpen, handleRemove, handleShowId } = usePostItem(post, remove);
 
     return (
-        <div ref={ref} className="post">
+        <div ref={ref} className="post" onClick={handleShowId}>
             <div className="post__content">
                 <strong>{post.id}. {post.title}</strong>
                 <div>
@@ -21,10 +21,10 @@ const PostItem = React.forwardRef<HTMLDivElement, PostItemProps>(({ post, remove
             </div>
             <div className="post__btns">
                 <MyButton onClick={handleOpen}>
-                    Открыть
+                    Open
                 </MyButton>
                 <MyButton onClick={handleRemove}>
-                    Удалить
+                    Delete
                 </MyButton>
             </div>
         </div>

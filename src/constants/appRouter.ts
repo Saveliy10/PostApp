@@ -6,17 +6,17 @@ import Login from '../pages/Login.tsx';
 
 interface Route {
     path: string;
-    component: ComponentType;
+    pageToRender: ComponentType;
     exact: boolean;
 };
 
 
 export const privateRoutes: Route[] = [
-    {path: '/about', component: About, exact: true},
-    {path: '/posts', component: Posts, exact: true},
-    {path: '/posts/:id', component: PostIdPage, exact: true},
+    {path: '/about', pageToRender: About, exact: true},
+    {path: '/posts', pageToRender: Posts, exact: true},
+    {path: '/posts/:id', pageToRender: PostIdPage, exact: true},
 ]
 
 export const publicRoutes: Route[] = [
-    {path: '/login', component: Login, exact: true},
+    {path: '/login', pageToRender: Login, exact: true},
 ]

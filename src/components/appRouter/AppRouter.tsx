@@ -14,7 +14,7 @@ const AppRouter = () => {
         isAuth ? (
             <Routes>
                 {privateRoutes.map(route => {
-                    const Component = route.component;
+                    const Component = route.pageToRender;
                     return (
                         <Route
                             element={<Component />}
@@ -28,7 +28,7 @@ const AppRouter = () => {
         ) : (
             <Routes>
                 {publicRoutes.map(route => {
-                    const Component = route.component;
+                    const Component = route.pageToRender;
                     return (
                         <Route
                             element={<Component />}
